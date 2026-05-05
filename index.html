@@ -2,33 +2,8 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 <title>PDF PROFORM</title>
-
-<!-- PWA / iOS Safari -->
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<meta name="apple-mobile-web-app-title" content="PDF PROFORM" />
-<meta name="mobile-web-app-capable" content="yes" />
-<meta name="theme-color" content="#262624" />
-<meta name="description" content="Crea facturas y proformas, exporta PDF al instante." />
-
-<!-- Apple Touch Icons -->
-<link rel="apple-touch-icon" href="icons/icon-180.png" />
-<link rel="apple-touch-icon" sizes="120x120" href="icons/icon-120.png" />
-<link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152.png" />
-<link rel="apple-touch-icon" sizes="167x167" href="icons/icon-167.png" />
-<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png" />
-
-<!-- Apple Splash Screens (iPhone 14 Pro / 15) -->
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
-<!-- Favicon -->
-<link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png" />
-<link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png" />
-
-<!-- Manifest -->
-<link rel="manifest" href="manifest.json" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
@@ -50,8 +25,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Ne
   position:relative;
   box-shadow:0 28px 70px -16px rgba(0,0,0,0.7),0 8px 24px rgba(0,0,0,0.4),0 0 0 0.5px rgba(255,255,255,0.04);
   border:1px solid rgba(255,255,255,0.05)}
-@media(max-width:480px){body{padding:0;padding-top:env(safe-area-inset-top)}
-.phone{border-radius:0;height:100vh;box-shadow:none;border:none}}
+@media(max-width:480px){body{padding:0}
+.phone{border-radius:0;height:100vh;box-shadow:none}}
 
 /* SCREENS */
 .screens{height:calc(100% - 90px);overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-bottom:20px}
@@ -281,12 +256,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Ne
 .cleg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 
 /* TAB BAR */
-.tab-bar{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
-  background:rgba(48,48,46,.88);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);
-  border-radius:999px;padding:6px;display:flex;gap:2px;
-  box-shadow:0 12px 32px -8px rgba(0,0,0,.55),0 0 0 .5px rgba(255,255,255,.06);
+.tab-bar{position:absolute;bottom:14px;left:16px;right:16px;
+  background:rgba(48,48,46,.92);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);
+  border-radius:999px;padding:4px;display:flex;justify-content:space-between;gap:2px;
+  box-shadow:0 10px 28px -8px rgba(0,0,0,.6),0 0 0 .5px rgba(255,255,255,.06);
   border:.5px solid var(--line);z-index:50}
-.tab{width:64px;height:68px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+.tab{flex:1;height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:4px;border:0;background:transparent;cursor:pointer;color:var(--ink3);font-size:11px;font-weight:500;
   border-radius:22px;font-family:inherit;transition:all .2s cubic-bezier(.4,0,.2,1);line-height:1;flex-shrink:0}
 .tab.on{color:var(--blue2);background:rgba(10,132,255,.22)}
@@ -319,11 +294,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Ne
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 input[type=date]::-webkit-calendar-picker-indicator{filter:invert(.7);cursor:pointer}
-/* PWA Safe Area (iPhone notch / Dynamic Island) */
-body { padding-top: env(safe-area-inset-top); }
-.phone { padding-top: env(safe-area-inset-top); }
-.tab-bar { bottom: calc(14px + env(safe-area-inset-bottom)); }
-
 </style>
 </head>
 <body>
@@ -724,14 +694,20 @@ function renderDocEditor(type,id){
   ${id&&type==='factura'&&existing.status==='pagada'?`<button class="status-btn mark-pend" onclick="markPending('${id}')">↩ Revertir a pendiente</button>`:''}
 
   <button class="export-btn" onclick="saveAndExportPDF('${type}')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    <svg style="width:16px;height:16px;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
     Guardar y exportar PDF
   </button>
   <button class="secondary-btn" onclick="saveOnly('${type}')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+    <svg style="width:16px;height:16px;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
     Solo guardar
   </button>
-  ${id?`<button class="del-doc-btn" onclick="deleteDoc('${type}','${id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/></svg> Eliminar</button>`:''}
+  ${id?`
+  <div id="deleteZone">
+    <button class="del-doc-btn" onclick="showDeleteConfirm('${id}','${type}')">
+      <svg style="width:14px;height:14px;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/></svg>
+      Eliminar documento
+    </button>
+  </div>`:''}
   `;
   renderEditorItems();renderEditorExp();recomputeTotals();
 }
@@ -845,11 +821,27 @@ function markPending(id){
   const f=D.facturas.find(d=>d.id===id);if(!f)return;
   f.status='pendiente';save();renderFacturas();toast('Revertida a pendiente');
 }
-function deleteDoc(type,id){
-  if(!confirm('¿Eliminar este documento?'))return;
+function showDeleteConfirm(id,type){
+  const zone=$('deleteZone');if(!zone)return;
+  zone.innerHTML=`<div style="margin:0 16px 16px;padding:14px;border-radius:14px;background:rgba(255,69,58,.12);border:.5px solid rgba(255,69,58,.4);text-align:center">
+    <p style="font-size:13px;color:var(--ink2);margin-bottom:10px;font-weight:500">¿Eliminar este documento? No se puede deshacer.</p>
+    <div style="display:flex;gap:8px">
+      <button style="flex:1;padding:9px;border:0;border-radius:10px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;background:var(--surface);color:var(--ink)" onclick="cancelDeleteDoc('${id}','${type}')">Cancelar</button>
+      <button style="flex:1;padding:9px;border:0;border-radius:10px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;background:var(--red);color:white" onclick="confirmDeleteDoc('${id}','${type}')">Eliminar</button>
+    </div>
+  </div>`;
+}
+function cancelDeleteDoc(id,type){
+  const zone=$('deleteZone');if(!zone)return;
+  zone.innerHTML=`<button class="del-doc-btn" onclick="showDeleteConfirm('${id}','${type}')">
+    <svg style="width:14px;height:14px;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/></svg>
+    Eliminar documento
+  </button>`;
+}
+function confirmDeleteDoc(id,type){
   if(type==='factura')D.facturas=D.facturas.filter(d=>d.id!==id);
   else D.proformas=D.proformas.filter(d=>d.id!==id);
-  save();toast('Eliminado','🗑');
+  save();toast('Documento eliminado','🗑');
   if(type==='factura'){FVIEW='list';renderFacturas()}else{PVIEW='list';renderProformas()}
 }
 
@@ -1245,25 +1237,6 @@ function deleteClient(){
 
 /* ===== INIT ===== */
 document.addEventListener('DOMContentLoaded',()=>{load();switchTab('inicio')});
-</script>
-
-<script>
-// ===== SERVICE WORKER (PWA offline) =====
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(reg => console.log('[PWA] SW registrado:', reg.scope))
-      .catch(err => console.warn('[PWA] SW error:', err));
-  });
-}
-
-// ===== SAFE AREA para iPhone con notch / Dynamic Island =====
-document.documentElement.style.setProperty(
-  '--safe-top', 'env(safe-area-inset-top)'
-);
-document.documentElement.style.setProperty(
-  '--safe-bottom', 'env(safe-area-inset-bottom)'
-);
 </script>
 </body>
 </html>
