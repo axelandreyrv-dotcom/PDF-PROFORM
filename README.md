@@ -1,26 +1,45 @@
- — Instalar en tu iPhone 📲
+# PDF PROFORM - App instalable en iPhone
 
-1. **Abrí Safari** en tu iPhone (⚠️ DEBE ser Safari, no Chrome)
-2. Entrá a la URL de GitHub Pages
-3. Tocá el ícono **Compartir** (cuadrado con flecha hacia arriba ↑)
-4. Bajá y tocá **"Agregar a la pantalla de inicio"**
-5. Cambiá el nombre si querés → **Agregar**
+Esta carpeta ya esta preparada como una PWA: una app web instalable desde Safari en iOS. No requiere Xcode, Mac, cuenta de Apple Developer ni publicacion en App Store.
 
-### ✅ Listo — Ya tenés PDF PROFORM instalada
+## Archivos incluidos
 
-La app aparece en tu pantalla de inicio con tu ícono,
-abre en pantalla completa sin barra del navegador,
-y funciona **100% offline** una vez que la abriste la primera vez.
+- `index.html`: la app completa.
+- `manifest.json`: nombre, iconos y configuracion de instalacion.
+- `sw.js`: cache offline para la app y sus librerias.
+- `icons/`: iconos para iPhone, iPad y navegadores.
 
----
+## Opcion recomendada: publicar gratis en GitHub Pages
 
-## ¿Qué puede hacer esta app?
+1. Entra a [GitHub](https://github.com) e inicia sesion.
+2. Crea un repositorio nuevo llamado `pdfproform`.
+3. Sube todos los archivos de esta carpeta:
+   - `index.html`
+   - `manifest.json`
+   - `sw.js`
+   - `icons/`
+4. Ve a `Settings` -> `Pages`.
+5. En `Branch`, elige `main` y carpeta `/ (root)`.
+6. Guarda y espera aproximadamente un minuto.
+7. GitHub mostrara una URL parecida a:
 
-- ✅ Crear facturas y proformas ilimitadas
-- ✅ Guardar clientes recurrentes
-- ✅ Perfil empresarial con logo
-- ✅ Exportar PDF profesional
-- ✅ Gráficos de ingresos
-- ✅ Funciona sin internet (offline)
-- ✅ Datos guardados en tu iPhone (localStorage)
-- ✅ Ícono personalizado en pantalla de inicio
+```text
+https://TU-USUARIO.github.io/pdfproform/
+```
+
+## Instalar en iPhone
+
+1. Abre la URL en Safari desde el iPhone.
+2. Toca el boton de compartir.
+3. Elige `Agregar a pantalla de inicio`.
+4. Confirma con `Agregar`.
+
+La app quedara instalada con icono propio, abrira en pantalla completa y podra funcionar offline despues de abrirla una primera vez con internet.
+
+## Actualizar la app
+
+Cuando cambies archivos, subelos de nuevo al hosting. El service worker actualiza el cache automaticamente la proxima vez que la app se abra con internet.
+
+## Nota sobre App Store
+
+Para generar un `.ipa` instalable fuera de Safari o publicar en App Store se necesita un proyecto iOS firmado con Xcode y una cuenta Apple Developer. Con esta carpeta, la forma directa y gratuita es instalarla como PWA.

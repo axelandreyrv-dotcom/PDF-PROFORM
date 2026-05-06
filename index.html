@@ -1,33 +1,22 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
 <title>PDF PROFORM</title>
-
-<!-- PWA / iOS Safari -->
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="PDF PROFORM" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="theme-color" content="#262624" />
 <meta name="description" content="Crea facturas y proformas, exporta PDF al instante." />
-
-<!-- Apple Touch Icons -->
 <link rel="apple-touch-icon" href="icons/icon-180.png" />
 <link rel="apple-touch-icon" sizes="120x120" href="icons/icon-120.png" />
 <link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152.png" />
 <link rel="apple-touch-icon" sizes="167x167" href="icons/icon-167.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png" />
-
-<!-- Apple Splash Screens (iPhone 14 Pro / 15) -->
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
-<!-- Favicon -->
 <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png" />
-
-<!-- Manifest -->
 <link rel="manifest" href="manifest.json" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
@@ -41,14 +30,50 @@
   --blue:#0A84FF;--blue2:#4DA3FF;--purple:#5E5CE6;--purple2:#8987F0;
   --red:#FF453A;--green:#30D158;--green2:#5BDE7E;--orange:#FF9F0A;--yellow:#FFD60A;
   --teal:#64D2FF;--indigo:#7D7AFF;
+  --body-bg:#1a1a18;
+  --tabbar-bg:rgba(48,48,46,.88);
+  --shadow1:0 24px 60px -16px rgba(0,0,0,0.6),0 8px 24px rgba(0,0,0,0.4);
+  --toast-bg:rgba(250,249,245,.96);--toast-text:#1c1c1e;
+  --calendar-invert:.7;
+  --color-scheme-mode:dark;
+}
+:root[data-theme="light"]{
+  --bg:#fafaf7;--surface:#ffffff;--surface2:#f4f3ee;--surface3:#f0efea;
+  --ink:#1c1c1e;--ink2:#3c3c43;--ink3:#6e6e73;--ink4:#a8a8ad;
+  --line:rgba(0,0,0,0.08);--line2:rgba(0,0,0,0.14);
+  --blue:#007AFF;--blue2:#0A84FF;--purple:#5856D6;--purple2:#7977E2;
+  --red:#FF3B30;--green:#34C759;--green2:#28A745;--orange:#FF9500;--yellow:#FFCC00;
+  --teal:#5AC8FA;--indigo:#5E5CE6;
+  --body-bg:#ebeae5;
+  --tabbar-bg:rgba(255,255,255,.92);
+  --shadow1:0 24px 60px -16px rgba(0,0,0,0.18),0 8px 24px rgba(0,0,0,0.1);
+  --toast-bg:rgba(28,28,30,.94);--toast-text:#fafaf7;
+  --calendar-invert:0;
+  --color-scheme-mode:light;
+}
+@media (prefers-color-scheme: light){
+  :root[data-theme="auto"]{
+    --bg:#fafaf7;--surface:#ffffff;--surface2:#f4f3ee;--surface3:#f0efea;
+    --ink:#1c1c1e;--ink2:#3c3c43;--ink3:#6e6e73;--ink4:#a8a8ad;
+    --line:rgba(0,0,0,0.08);--line2:rgba(0,0,0,0.14);
+    --blue:#007AFF;--blue2:#0A84FF;--purple:#5856D6;--purple2:#7977E2;
+    --red:#FF3B30;--green:#34C759;--green2:#28A745;--orange:#FF9500;--yellow:#FFCC00;
+    --teal:#5AC8FA;--indigo:#5E5CE6;
+    --body-bg:#ebeae5;
+    --tabbar-bg:rgba(255,255,255,.92);
+    --shadow1:0 24px 60px -16px rgba(0,0,0,0.18),0 8px 24px rgba(0,0,0,0.1);
+    --toast-bg:rgba(28,28,30,.94);--toast-text:#fafaf7;
+    --calendar-invert:0;
+    --color-scheme-mode:light;
+  }
 }
 body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
-  -webkit-font-smoothing:antialiased;color:var(--ink);background:#1a1a18;
+  -webkit-font-smoothing:antialiased;color:var(--ink);background:var(--body-bg);
   min-height:100vh;display:flex;justify-content:center;align-items:flex-start;padding:20px}
 .phone-wrap{width:100%;max-width:430px}
 .phone{width:100%;height:860px;background:var(--bg);border-radius:36px;overflow:hidden;
   position:relative;
-  box-shadow:0 28px 70px -16px rgba(0,0,0,0.7),0 8px 24px rgba(0,0,0,0.4),0 0 0 0.5px rgba(255,255,255,0.04);
+  box-shadow:var(--shadow1),0 0 0 0.5px var(--line);
   border:1px solid rgba(255,255,255,0.05)}
 @media(max-width:480px){body{padding:0;padding-top:env(safe-area-inset-top)}
 .phone{border-radius:0;height:100vh;box-shadow:none;border:none}}
@@ -142,14 +167,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Ne
 .fld{display:flex;flex-direction:column;margin-bottom:8px}
 .fld label{font-size:11px;font-weight:500;color:var(--ink4);text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
 .fld input,.fld select,.fld textarea{border:0;background:transparent;outline:0;padding:4px 0;font-family:inherit;
-  font-size:15px;color:var(--ink);font-weight:500;border-bottom:1px solid transparent;transition:border-color .15s;width:100%;text-align:left}
-.fld input[type=date]{text-align:left;-webkit-text-align:left}
+  font-size:15px;color:var(--ink);font-weight:500;border-bottom:1px solid transparent;transition:border-color .15s;width:100%}
 .fld input:focus,.fld select:focus,.fld textarea:focus{border-bottom-color:var(--blue)}
 .fld input.big{font-size:19px;font-weight:700;letter-spacing:-.02em}
-.fld input[type=email],.fld input[type=tel]{overflow:hidden;text-overflow:ellipsis}
 .fld input::placeholder,.fld textarea::placeholder{color:var(--ink4);font-weight:400}
 .fld select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='%23a8a69b' d='M8 11L4 7h8z'/></svg>");background-repeat:no-repeat;background-position:right 0 center;padding-right:20px;color:var(--ink)}
-.fld select option{background:#2a2a28}
+.fld select option{background:var(--surface);color:var(--ink)}
 .fld2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .logo-area{display:flex;align-items:center;gap:12px;margin-bottom:14px}
 .logo-slot{width:56px;height:56px;border-radius:14px;background:var(--surface3);border:1px dashed rgba(255,255,255,.18);
@@ -212,6 +235,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Ne
   box-shadow:0 10px 26px -6px rgba(10,132,255,.55)}
 .export-btn:active{transform:scale(.98)}
 .export-btn svg{width:16px;height:16px}
+.secondary-btn svg{width:18px !important;height:18px !important;flex-shrink:0;min-width:18px;min-height:18px}
 
 /* SECONDARY BTN */
 .secondary-btn{width:calc(100% - 32px);margin:4px 16px 10px;padding:13px;border:.5px solid var(--line);border-radius:12px;
@@ -284,15 +308,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Ne
 
 /* TAB BAR */
 .tab-bar{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
-  background:rgba(48,48,46,.88);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);
-  border-radius:999px;padding:6px;display:flex;gap:2px;
+  background:var(--tabbar-bg);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);
+  border-radius:999px;padding:4px 8px;display:flex;gap:0;
   box-shadow:0 12px 32px -8px rgba(0,0,0,.55),0 0 0 .5px rgba(255,255,255,.06);
   border:.5px solid var(--line);z-index:50}
-.tab{width:64px;height:68px;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:4px;border:0;background:transparent;cursor:pointer;color:var(--ink3);font-size:11px;font-weight:500;
-  border-radius:22px;font-family:inherit;transition:all .2s cubic-bezier(.4,0,.2,1);line-height:1;flex-shrink:0}
+.tab{width:58px;height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:3px;border:0;background:transparent;cursor:pointer;color:var(--ink3);font-size:10px;font-weight:500;
+  border-radius:18px;font-family:inherit;transition:all .2s cubic-bezier(.4,0,.2,1);line-height:1;flex-shrink:0}
 .tab.on{color:var(--blue2);background:rgba(10,132,255,.22)}
-.tab svg{width:24px;height:24px;flex-shrink:0}
+.tab svg{width:21px;height:21px;flex-shrink:0}
 
 /* EMPTY STATE */
 .empty{text-align:center;padding:70px 24px;color:var(--ink3);font-size:14px}
@@ -306,7 +330,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Ne
   padding:7px 24px 7px 12px;font-family:inherit;font-size:12px;font-weight:500;color:var(--ink2);cursor:pointer;outline:0;
   flex:1;min-width:0;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='%23a8a69b' d='M8 11L4 7h8z'/></svg>");
   background-repeat:no-repeat;background-position:right 7px center}
-.psel option{background:#2a2a28}
+.psel option{background:var(--surface);color:var(--ink)}
 .toolbar{display:flex;align-items:center;gap:8px;padding:0 12px 12px}
 .tb-btn{width:36px;height:36px;border:0;border-radius:12px;background:var(--surface);color:var(--ink2);
   display:grid;place-items:center;cursor:pointer;border:.5px solid var(--line)}
@@ -314,18 +338,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Ne
 
 /* TOAST */
 .toast{position:fixed;top:30px;left:50%;transform:translateX(-50%) translateY(-80px);
-  background:rgba(250,249,245,.96);backdrop-filter:blur(20px);color:#1c1c1e;padding:11px 20px;
+  background:var(--toast-bg);backdrop-filter:blur(20px);color:var(--toast-text);padding:11px 20px;
   border-radius:999px;font-size:14px;font-weight:500;z-index:9999;opacity:0;
   transition:all .28s cubic-bezier(.4,0,.2,1);display:flex;align-items:center;gap:7px;
   white-space:nowrap;pointer-events:none;box-shadow:0 12px 32px -8px rgba(0,0,0,.5)}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-input[type=date]::-webkit-calendar-picker-indicator{filter:invert(.7);cursor:pointer}
-/* PWA Safe Area (iPhone notch / Dynamic Island) */
+input[type=date]::-webkit-calendar-picker-indicator{filter:invert(var(--calendar-invert));cursor:pointer}
+.fld2 .fld input{min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fld input[type=email]{font-size:13px !important;min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.fld input[type=tel]{font-size:13px !important;min-width:0;max-width:100%}
+input[type=date]{text-align:left !important;-webkit-text-align:left !important;direction:ltr;display:block;width:100%}
+input[type=date]::-webkit-date-and-time-value{text-align:left !important;margin:0;padding:0}
+input[type=date]::-webkit-datetime-edit{text-align:left !important;padding:0;margin:0}
+input[type=date]::-webkit-datetime-edit-fields-wrapper{text-align:left !important;padding:0}
+
 body { padding-top: env(safe-area-inset-top); }
 .phone { padding-top: env(safe-area-inset-top); }
 .tab-bar { bottom: calc(14px + env(safe-area-inset-bottom)); }
-
 </style>
 </head>
 <body>
@@ -385,6 +415,26 @@ function save(){try{
   localStorage.setItem(K.cl,JSON.stringify(D.clients));
 }catch(e){}}
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2)}
+
+/* ===== TEMA / APARIENCIA ===== */
+const TKEY='ppf_theme';
+function getTheme(){return localStorage.getItem(TKEY)||'dark'}
+function setTheme(t){localStorage.setItem(TKEY,t);applyTheme(t)}
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  const meta=document.querySelector('meta[name="theme-color"]');
+  if(meta){
+    const styles=getComputedStyle(document.documentElement);
+    meta.content=(styles.getPropertyValue('--bg')||'#262624').trim();
+  }
+}
+function themeLabel(){const t=getTheme();return t==='dark'?'Oscuro':t==='light'?'Claro':'Automático'}
+applyTheme(getTheme());
+if(window.matchMedia){
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{
+    if(getTheme()==='auto')applyTheme('auto');
+  });
+}
 function fmt(n){if(isNaN(n)||n===null)n=0;return Number(n).toLocaleString('es-CR',{minimumFractionDigits:2,maximumFractionDigits:2})}
 function num(v){const n=parseFloat(v);return isNaN(n)?0:n}
 function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
@@ -730,7 +780,7 @@ function renderDocEditor(type,id){
     Guardar y exportar PDF
   </button>
   <button class="secondary-btn" onclick="saveOnly('${type}')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex-shrink:0"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
     Solo guardar
   </button>
   ${id?`<button class="del-doc-btn" onclick="deleteDoc('${type}','${id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/></svg> Eliminar</button>`:''}
@@ -953,7 +1003,6 @@ function exportPDF(doc,type){
   const{jsPDF}=window.jspdf;const pdf=new jsPDF({unit:'pt',format:'letter'});
   const W=pdf.internal.pageSize.getWidth(),H=pdf.internal.pageSize.getHeight(),M=48;
   const t=calcTotal(doc),rawCur=doc.currency||'$';
-  // Mapear símbolos que Helvetica no soporta a versión ASCII segura para PDF
   const curMap={'₡':'CRC ','₩':'KRW ','₹':'INR ','₴':'UAH ','₺':'TRY ','₿':'BTC '};
   const cur=curMap[rawCur]||rawCur;
   pdf.setFillColor(10,132,255);pdf.rect(0,0,W,4,'F');
@@ -1059,7 +1108,7 @@ function renderInformes(){
   if(barCh){try{barCh.destroy()}catch(e){}}
   const bCtx=$('barCanvas')?.getContext('2d');
   if(bCtx){
-    Chart.defaults.color='#a8a69b';
+    Chart.defaults.color=getComputedStyle(document.documentElement).getPropertyValue('--ink3').trim()||'#a8a69b';
     barCh=new Chart(bCtx,{type:'bar',data:{labels:monthly.map(m=>m.lbl),datasets:[{label:'Emitido',data:monthly.map(m=>m.emitido),backgroundColor:'rgba(77,163,255,.75)',borderRadius:6,borderSkipped:false},{label:'Cobrado',data:monthly.map(m=>m.cobrado),backgroundColor:'rgba(48,209,88,.75)',borderRadius:6,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(255,255,255,.05)'},ticks:{font:{size:10}}},y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{font:{size:10},callback:v=>cur+fmt(v)}}}}});
   }
 
@@ -1072,7 +1121,7 @@ function renderInformes(){
     const vals=labels.map(k=>statCounts[k]);
     const colors={'pagada':'rgba(48,209,88,.8)','pendiente':'rgba(255,214,0,.8)','vencida':'rgba(255,69,58,.8)','parcial':'rgba(255,159,10,.8)'};
     if(labels.length){
-      pieCh=new Chart(pCtx,{type:'doughnut',data:{labels:labels.map(statusLabel),datasets:[{data:vals,backgroundColor:labels.map(k=>colors[k]),borderWidth:2,borderColor:'#30302e'}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{display:false}},cutout:'60%'}});
+      pieCh=new Chart(pCtx,{type:'doughnut',data:{labels:labels.map(statusLabel),datasets:[{data:vals,backgroundColor:labels.map(k=>colors[k]),borderWidth:2,borderColor:getComputedStyle(document.documentElement).getPropertyValue('--surface').trim()||'#30302e'}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{display:false}},cutout:'60%'}});
       const leg=$('pieLegend');
       if(leg)leg.innerHTML=labels.map((k,i)=>`<div class="cleg"><div class="cleg-dot" style="background:${colors[k]}"></div>${statusLabel(k)}: ${vals[i]}</div>`).join('');
     } else {
@@ -1089,6 +1138,7 @@ function renderAjustes(){
   if(AVIEW==='profile'){renderProfile();return}
   if(AVIEW==='clients'){renderClients();return}
   if(AVIEW==='clientEdit'){renderClientEdit();return}
+  if(AVIEW==='theme'){renderThemeScreen();return}
 
   const c=D.company||{};
   const profileSub=c.name?c.name:'Configura tu empresa';
@@ -1105,11 +1155,38 @@ function renderAjustes(){
   </div>
   <div class="sec-label">General</div>
   <div class="list-card">
+    ${lRow('ic-orange','<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>','Apariencia',themeLabel(),"AVIEW='theme';renderAjustes()")}
     ${lRow('ic-teal','<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>','Contacto','axelandreyrv@outlook.com',"window.open('mailto:axelandreyrv@outlook.com')")}
     ${lRow('ic-indigo','<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>','Idioma de la app','Español',"toast('Próximamente')")}
   </div>
   <div style="text-align:center;font-size:11px;color:var(--ink4);padding:10px 0 30px">PDF PROFORM · v1.0 · 2026</div>
   `
+}
+
+/* ===== APARIENCIA ===== */
+function renderThemeScreen(){
+  const cur=getTheme();
+  const opt=(val,title,desc,iconSvg,iclass)=>`
+    <div class="lrow" onclick="setTheme('${val}');renderThemeScreen();toast('${title} ✓')">
+      <div class="licon ${iclass}">${iconSvg}</div>
+      <div style="flex:1">
+        <div class="ltitle">${title}</div>
+        <div class="lsub">${desc}</div>
+      </div>
+      ${cur===val?`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue2)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;width:20px;height:20px"><polyline points="20 6 9 17 4 12"/></svg>`:''}
+    </div>`;
+  $('s-ajustes').innerHTML=`
+  <div class="backbar" onclick="AVIEW='main';renderAjustes()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>Ajustes</span>
+  </div>
+  <div class="subhead"><h1>Apariencia</h1><p>Elige cómo quieres ver la app. La opción automática sigue la configuración de tu sistema.</p></div>
+  <div class="list-card">
+    ${opt('auto','Automático','Sigue el sistema (claro/oscuro)','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><circle cx="12" cy="12" r="10"/><path d="M12 2v20"/><path d="M12 2a10 10 0 0 0 0 20" fill="currentColor"/></svg>','ic-teal')}
+    ${opt('light','Claro','Fondo blanco siempre','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>','ic-yellow')}
+    ${opt('dark','Oscuro','Fondo oscuro siempre','<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>','ic-indigo')}
+  </div>
+  `;
 }
 
 /* ===== PROFILE EMPRESARIAL ===== */
@@ -1250,22 +1327,16 @@ document.addEventListener('DOMContentLoaded',()=>{load();switchTab('inicio')});
 </script>
 
 <script>
-// ===== SERVICE WORKER (PWA offline) =====
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(reg => console.log('[PWA] SW registrado:', reg.scope))
-      .catch(err => console.warn('[PWA] SW error:', err));
+    const isSecure = location.protocol === 'https:' || location.hostname === 'localhost';
+    if (!isSecure) return;
+    navigator.serviceWorker.register('./sw.js', { scope: './' })
+      .then(() => {}).catch(() => {});
   });
 }
-
-// ===== SAFE AREA para iPhone con notch / Dynamic Island =====
-document.documentElement.style.setProperty(
-  '--safe-top', 'env(safe-area-inset-top)'
-);
-document.documentElement.style.setProperty(
-  '--safe-bottom', 'env(safe-area-inset-bottom)'
-);
+document.documentElement.style.setProperty('--safe-top', 'env(safe-area-inset-top)');
+document.documentElement.style.setProperty('--safe-bottom', 'env(safe-area-inset-bottom)');
 </script>
 </body>
 </html>

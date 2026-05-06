@@ -2,8 +2,8 @@
   "name": "PDF PROFORM",
   "short_name": "PDF PROFORM",
   "description": "Crea facturas y proformas, exporta PDF al instante.",
-  "start_url": "/",
-  "scope": "/",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#1a1a18",
@@ -27,12 +27,12 @@
   "shortcuts": [
     {
       "name": "Nueva proforma",
-      "url": "/?tab=proformas&new=1",
+      "url": "./?tab=proformas&new=1",
       "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
     },
     {
       "name": "Nueva factura",
-      "url": "/?tab=facturas&new=1",
+      "url": "./?tab=facturas&new=1",
       "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
     }
   ]
